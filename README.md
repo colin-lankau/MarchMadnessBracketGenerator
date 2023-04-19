@@ -34,7 +34,7 @@ If struggling with setup, contact me
 
 ## Authors
 
-ex. [@Colin-Lankau](https://www.linkedin.com/in/colin-lankau/)
+[@Colin-Lankau](https://www.linkedin.com/in/colin-lankau/)
 
 ## Version History
 
@@ -49,4 +49,4 @@ This project is licensed under the Colin-Lankau License - see the LICENSE.md fil
 
 Thanks to ScrapeOps for scraping the data needed for bracket generation
 
-* [scrape-ops](https://scrapeops.io/]
+* [@ScrapeOps](https://scrapeops.io/]
