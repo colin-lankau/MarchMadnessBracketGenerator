@@ -19,6 +19,7 @@ This project is a way for me to generate march madness brackets without having t
 * Install dependencies from 'requirements.txt' with:
 ```
 pip install -r requirements.txt
+```
 
 ### Executing program
 
