@@ -1,0 +1,321 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="min-height: 100%; overflow: scroll">
+    <header>
+        <ol>
+            <li>Round 1 <br/><span>Mar 15/16</span></li>
+            <li>Round 2 <br/><span>Mar 17/18</span></li>
+            <li>Sweet 16 <br/><span>Mar 22/23</span></li>
+            <li>Elite 8 <br/><span>Mar 24/25</span></li>
+            <li>Final 4 <br/><span>Mar 31/Apr 2</span></li>
+            <li>Elite 8 <br/><span>Mar 24/25</span></li>
+            <li>Sweet 16<br/><span>Mar 22/23</span></li>
+            <li>Round 2 <br/><span>Mar 17/18</span></li>
+            <li>Round 1 <br/><span>Mar 15/16</span></li>
+        </ol>
+    </header>
+    <div style="text-align:center; ">
+        <a href="{{ url_for('march_madness.index') }}" class="btn btn-dark btn-sm" role="button">New Bracket</a>
+    </div>
+    <div class="bracket">
+        <div class="region region-1">
+        <!-- Region 1 Round 1-->
+            {% for i in range(0, r64 | length // 4, 2) %}
+            <ul class="matchup matchup-{{ i//2 + 1 }}">
+                {% if r32[i//2].name == r64[i].name %}
+                    <li class="team team-top winner">{{ r64[i].seed }}) {{ r64[i].name }}</li>
+                    <li class="team team-bottom">{{ r64[i+1].seed }}) {{ r64[i+1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ r64[i].seed }}) {{ r64[i].name }}</li>
+                    <li class="team team-bottom winner">{{ r64[i+1].seed }}) {{ r64[i+1].name }}</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
+        <!-- End Region 1 Round 1 -->
+        
+        <!-- Region 1 Round 2 -->
+            {% for i in range(0, r32 | length // 4, 2) %}
+            {% set matchupNumber = 33 %}
+            <ul class="matchup matchup-{{ matchupNumber + (i // 2 ) }}">
+                {% if s16[i//2].name == r32[i].name %}
+                    <li class="team team-top winner">{{ r32[i].seed }}) {{ r32[i].name }}</li>
+                    <li class="team team-bottom">{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ r32[i].seed }}) {{ r32[i].name }}</li>
+                    <li class="team team-bottom winner">{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
+        <!-- End Region 1 Round 2 -->
+        
+        <!-- Region 1 Sweet 16 -->
+            <ul class="matchup matchup-49">
+                {% if e8[0].name == s16[0].name %}
+                    <li class="team team-top winner">{{ s16[0].seed }}) {{ s16[0].name }}</li>
+                    <li class="team team-bottom">{{ s16[1].seed }}) {{ s16[1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ s16[0].seed }}) {{ s16[0].name }}</li>
+                    <li class="team team-bottom winner">{{ s16[1].seed }}) {{ s16[1].name }}</li>
+                {% endif %}
+            </ul>
+            <ul class="matchup matchup-50">
+                {% if e8[1].name == s16[2].name %}
+                    <li class="team team-top winner">{{ s16[2].seed }}) {{ s16[2].name }}</li>
+                    <li class="team team-bottom">{{ s16[3].seed }}) {{ s16[3].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ s16[2].seed }}) {{ s16[2].name }}</li>
+                    <li class="team team-bottom winner">{{ s16[3].seed }}) {{ s16[3].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Region 1 Sweet 16 -->
+        
+        <!-- Region 1 Final -->
+            <ul class="matchup matchup-57">
+                {% if f4[0].name == e8[0].name %}
+                    <li class="team team-top winner">{{ e8[0].seed }}) {{ e8[0].name }}</li>
+                    <li class="team team-bottom">{{ e8[1].seed }}) {{ e8[1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ e8[0].seed }}) {{ e8[0].name }}</li>
+                    <li class="team team-bottom winner">{{ e8[1].seed }}) {{ e8[1].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Region 1 Final -->
+            
+        </div>
+        <div class="region-2 region">
+        <!-- Region 2 Round 1 -->
+            {% for i in range(r64 | length // 4, (r64 | length // 4) * 2, 2) %}
+            <ul class="matchup matchup-{{ i//2 + 1 }}">
+                {% if r32[i//2].name == r64[i].name %}
+                    <li class="team team-top winner">{{ r64[i].seed }}) {{ r64[i].name }}</li>
+                    <li class="team team-bottom">{{ r64[i+1].seed }}) {{ r64[i+1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ r64[i].seed }}) {{ r64[i].name }}</li>
+                    <li class="team team-bottom winner">{{ r64[i+1].seed }}) {{ r64[i+1].name }}</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
+        <!-- End Region 2 Round 1 -->
+            
+        <!-- Region 2 Round 2 -->
+            {% for i in range(r32 | length // 4, (r32 | length // 4) * 2, 2) %}
+            {% set matchupNumber = 37 %}
+            <ul class="matchup matchup-{{ matchupNumber + ( (i-8) // 2 ) }}">
+                {% if s16[i//2].name == r32[i].name %}
+                    <li class="team team-top winner">{{ r32[i].seed }}) {{ r32[i].name }}</li>
+                    <li class="team team-bottom">{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ r32[i].seed }}) {{ r32[i].name }}</li>
+                    <li class="team team-bottom winner">{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
+        <!-- End Region 2 Round 2 -->
+            
+        <!-- Region 2 Sweet 16 -->
+            <ul class="matchup matchup-49">
+                {% if e8[2].name == s16[4].name %}
+                    <li class="team team-top winner">{{ s16[4].seed }}) {{ s16[4].name }}</li>
+                    <li class="team team-bottom">{{ s16[5].seed }}) {{ s16[5].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ s16[4].seed }}) {{ s16[4].name }}</li>
+                    <li class="team team-bottom winner">{{ s16[5].seed }}) {{ s16[5].name }}</li>
+                {% endif %}
+            </ul>
+            <ul class="matchup matchup-50">
+                {% if e8[3].name == s16[6].name %}
+                    <li class="team team-top winner">{{ s16[6].seed }}) {{ s16[6].name }}</li>
+                    <li class="team team-bottom">{{ s16[7].seed }}) {{ s16[7].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ s16[6].seed }}) {{ s16[6].name }}</li>
+                    <li class="team team-bottom winner">{{ s16[7].seed }}) {{ s16[7].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Region 2 Sweet 16 -->
+            
+        <!-- Region 2 Final -->
+            <ul class="matchup matchup-58">
+                {% if f4[1].name == e8[2].name %}
+                    <li class="team team-top winner">{{ e8[2].seed }}) {{ e8[2].name }}</li>
+                    <li class="team team-bottom">{{ e8[3].seed }}) {{ e8[3].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ e8[2].seed }}) {{ e8[2].name }}</li>
+                    <li class="team team-bottom winner">{{ e8[3].seed }}) {{ e8[3].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Region 2 Final -->
+            
+        </div>
+        <div class="region-3 region">
+        
+        <!-- Region 3 Round 1 -->
+            {% for i in range((r64 | length // 4) * 2, (r64 | length // 4) * 3, 2) %}
+            <ul class="matchup matchup-{{ i//2 + 1 }}">
+                {% if r32[i//2].name == r64[i].name %}
+                    <li class="team team-top winner">{{ r64[i].seed }}) {{ r64[i].name }}</li>
+                    <li class="team team-bottom">{{ r64[i+1].seed }}) {{ r64[i+1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ r64[i].seed }}) {{ r64[i].name }}</li>
+                    <li class="team team-bottom winner">{{ r64[i+1].seed }}) {{ r64[i+1].name }}</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
+        <!-- End Region 3 Round 1 -->
+            
+        <!-- Region 3 Round 2 -->
+            {% for i in range((r32 | length // 4) * 2, (r32 | length // 4) * 3, 2) %}
+            {% set matchupNumber = 41 %}
+            <ul class="matchup matchup-{{ matchupNumber + ( (i-16) // 2 ) }}">
+                {% if s16[i//2].name == r32[i].name %}
+                    <li class="team team-top winner">{{ r32[i].seed }}) {{ r32[i].name }}</li>
+                    <li class="team team-bottom">{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ r32[i].seed }}) {{ r32[i].name }}</li>
+                    <li class="team team-bottom winner">{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
+        <!-- End Region 3 Round 2 -->
+
+        <!-- Region 3 Sweet 16 -->
+            <ul class="matchup matchup-53">
+                {% if e8[4].name == s16[8].name %}
+                    <li class="team team-top winner">{{ s16[8].seed }}) {{ s16[8].name }}</li>
+                    <li class="team team-bottom">{{ s16[9].seed }}) {{ s16[9].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ s16[8].seed }}) {{ s16[8].name }}</li>
+                    <li class="team team-bottom winner">{{ s16[9].seed }}) {{ s16[9].name }}</li>
+                {% endif %}
+            </ul>
+            <ul class="matchup matchup-54">
+                {% if e8[5].name == s16[10].name %}
+                    <li class="team team-top winner">{{ s16[10].seed }}) {{ s16[10].name }}</li>
+                    <li class="team team-bottom">{{ s16[11].seed }}) {{ s16[11].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ s16[10].seed }}) {{ s16[10].name }}</li>
+                    <li class="team team-bottom winner">{{ s16[11].seed }}) {{ s16[11].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Region 3 Sweet 16-->
+
+        <!-- Region 3 Final -->
+            <ul class="matchup matchup-59">
+                {% if f4[2].name == e8[4].name %}
+                    <li class="team team-top winner">{{ e8[4].seed }}) {{ e8[4].name }}</li>
+                    <li class="team team-bottom">{{ e8[5].seed }}) {{ e8[5].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ e8[4].seed }}) {{ e8[4].name }}</li>
+                    <li class="team team-bottom winner">{{ e8[5].seed }}) {{ e8[5].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Region 3 Final -->
+        </div>
+        
+        <div class="region-4 region">
+        <!-- Region 4 Round 1 -->
+            {% for i in range((r64 | length // 4) * 3, r64 | length, 2) %}
+            <ul class="matchup matchup-{{ i//2 + 1 }}">
+                {% if r32[i//2].name == r64[i].name %}
+                    <li class="team team-top winner">{{ r64[i].seed }}) {{ r64[i].name }}</li>
+                    <li class="team team-bottom">{{ r64[i+1].seed }}) {{ r64[i+1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ r64[i].seed }}) {{ r64[i].name }}</li>
+                    <li class="team team-bottom winner">{{ r64[i+1].seed }}) {{ r64[i+1].name }}</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
+        <!-- End Region 4 Round 1 -->
+            
+        <!-- Region 4 Round 2 -->
+            {% for i in range((r32 | length // 4) * 3, r32 | length, 2) %}
+            {% set matchupNumber = 45 %}
+            <ul class="matchup matchup-{{ matchupNumber + ( (i-24) // 2 ) }}">
+                {% if s16[i//2].name == r32[i].name %}
+                    <li class="team team-top winner">{{ r32[i].seed }}) {{ r32[i].name }}</li>
+                    <li class="team team-bottom">{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ r32[i].seed }}) {{ r32[i].name }}</li>
+                    <li class="team team-bottom winner">{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
+        <!-- End Region 4 Round 2 -->
+
+        <!-- Region 4 Sweet 16 -->
+            <ul class="matchup matchup-55">
+                {% if e8[6].name == s16[12].name %}
+                    <li class="team team-top winner">{{ s16[12].seed }}) {{ s16[12].name }}</li>
+                    <li class="team team-bottom">{{ s16[13].seed }}) {{ s16[13].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ s16[12].seed }}) {{ s16[12].name }}</li>
+                    <li class="team team-bottom winner">{{ s16[13].seed }}) {{ s16[13].name }}</li>
+                {% endif %}
+            </ul>
+            <ul class="matchup matchup-56">
+                {% if e8[7].name == s16[14].name %}
+                    <li class="team team-top winner">{{ s16[14].seed }}) {{ s16[14].name }}</li>
+                    <li class="team team-bottom">{{ s16[15].seed }}) {{ s16[15].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ s16[14].seed }}) {{ s16[14].name }}</li>
+                    <li class="team team-bottom winner">{{ s16[15].seed }}) {{ s16[15].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Region 4 Sweet 16 -->
+
+        <!-- Region 4 Final -->
+            <ul class="matchup matchup-60">
+                {% if f4[3].name == e8[6].name %}
+                    <li class="team team-top winner">{{ e8[6].seed }}) {{ e8[6].name }}</li>
+                    <li class="team team-bottom">{{ e8[7].seed }}) {{ e8[7].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ e8[6].seed }}) {{ e8[6].name }}</li>
+                    <li class="team team-bottom winner">{{ e8[7].seed }}) {{ e8[7].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Region 4 Final -->
+        </div>
+
+        <div class="final-four">
+        <!-- Final Four Game 1 -->
+            <ul class="matchup matchup-61">
+                {% if final[0].name == f4[0].name %}
+                    <li class="team team-top winner">{{ f4[0].seed }}) {{ f4[0].name }}</li>
+                    <li class="team team-bottom">{{ f4[1].seed }}) {{ f4[1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ f4[0].seed }}) {{ f4[0].name }}</li>
+                    <li class="team team-bottom winner">{{ f4[1].seed }}) {{ f4[1].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Final Four Game 1 -->
+            
+        <!-- Final Four Game  2-->
+            <ul class="matchup matchup-62">
+                {% if final[1].name == f4[2].name %}
+                    <li class="team team-top winner">{{ f4[2].seed }}) {{ f4[2].name }}</li>
+                    <li class="team team-bottom">{{ f4[3].seed }}) {{ f4[3].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ f4[2].seed }}) {{ f4[2].name }}</li>
+                    <li class="team team-bottom winner">{{ f4[3].seed }}) {{ f4[3].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Final Four Game 2-->
+    
+        <!-- Championship Game -->
+            <ul class="matchup championship">
+                {% if final[0].name == champ %}
+                    <li class="team team-top winner">{{ final[0].seed }}) {{ final[0].name }}</li>
+                    <li class="team team-bottom">{{ final[1].seed }}) {{ final[1].name }}</li>
+                {% else %}
+                    <li class="team team-top">{{ final[0].seed }}) {{ final[0].name }}</li>
+                    <li class="team team-bottom winner">{{ final[1].seed }}) {{ final[1].name }}</li>
+                {% endif %}
+            </ul>
+        <!-- End Championship Game-->
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>

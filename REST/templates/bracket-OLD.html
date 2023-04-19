@@ -1,0 +1,176 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+<body style="min-height: 100%; overflow: scroll;">
+  <header>
+    <!--<div class='half-circle-container'>
+      <div class='half-circle top-circle'>
+        <div></div>
+      </div>
+    </div>-->
+    <div class='header-text'>
+      <h1>2023 NCAA Brackets</h1>
+    </div>
+    <div class='half-circle-container'>
+      <div class='half-circle bottom-circle'>
+        <div></div>
+      </div>
+  </div>
+  </header>
+  <section>
+    <div class='tournament tournament-header'>
+      <ul class='round'>
+        <li>First Round</li>
+      </ul>
+      <ul class='round'>
+        <li>Second Round</li>
+      </ul>
+      <ul class='round'>
+        <li>Sweet 16</li>
+      </ul>
+      <ul class='round'>
+        <li>Elite 8</li>
+      </ul>
+      <ul class='round'>
+        <li>Final 4</li>
+      </ul>
+      <ul class='round'>
+      </ul>
+      <ul class='round'>
+        <li>National Championship</li>
+      </ul>
+      <ul class='round'>
+      </ul>
+      <ul class='round'>
+        <li>Final 4</li>
+      </ul>
+      <ul class='round'>
+        <li>Elite 8</li>
+      </ul>
+      <ul class='round'>
+        <li>Sweet 16</li>
+      </ul>
+      <ul class='round'>
+        <li>Second Round</li>
+      </ul>
+      <ul class='round'>
+        <li>First Round</li>
+      </ul>
+    </div>
+    <div class='tournament'>
+      <ul class='round seed'>
+        {% for i in range(0, (r64 | length)//2, 2) %}
+          <li class='spacer'>&nbsp;</li>
+          <li class='game-left game-top'>
+            <span>{{ r64[i].seed }}</span>
+            <span>{{ r64[i].name }}</span>
+          </li>
+          <li class='game-left game-bottom extra-padding2'>
+            <span>{{ r64[i+1].seed }}</span>
+            <span>{{ r64[i+1].name }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      <ul class='round round-1'>
+        {% for i in range(0, (r32 | length)//2, 2) %}
+          <li class='spacer'>&nbsp;</li>
+          <li class='game-left game-top'>{{ r32[i].seed }}) {{ r32[i].name }}</li>
+          <li class='game-left spacer'>&nbsp;</li>
+          <li class='game-left game-bottom'>{{ r32[i+1].seed }}) {{ r32[i+1].name }}</li>
+        {% endfor %}
+      </ul>
+      <ul class='round round-2'>
+        {% for i in range(0, (s16 | length)//2, 2) %}
+          <li class='spacer'>&nbsp;</li>
+          <li class='game-left game-top'>{{ s16[i].seed }}) {{ s16[i].name }}</li>
+          <li class='game-left spacer'>&nbsp;</li>
+          <li class='game-left game-bottom'>{{ s16[i+1].seed }}) {{ s16[i+1].name }}</li>
+        {% endfor %}
+      </ul>
+      <ul class='round round-3'>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game-left game-top'>{{ e8[0].seed }}) {{ e8[0].name }}</li>
+        <li class='game-left spacer region region-right'>East</li>
+        <li class='game-left game-bottom'>{{ e8[1].seed }}) {{ e8[1].name }}</li>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game-left game-top'>{{ e8[2].seed }}) {{ e8[2].name }}</li>
+        <li class='game-left spacer region region-right'>West</li>
+        <li class='game-left game-bottom'>{{ e8[3].seed }}) {{ e8[3].name }}</li>
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round round-4'>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game-left game-top'>{{ f4[0].seed }}) {{ f4[0].name }}</li>
+        <li class='game-left spacer'>&nbsp;</li>
+        <li class='game-left game-bottom'>{{ f4[1].seed }}) {{ f4[1].name }}</li>
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round semi-final'>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game-left game-top'>{{ final[0].seed }}) {{ final[0].name }}</li>
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round finals'>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game final'>{{ champ }}</li>
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round semi-final'>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game-right game-top'>{{ final[1].seed }}) {{ final[1].name }}</li>
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round round-4'>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game-right game-top'>{{ f4[2].seed }}) {{ f4[2].name }}</li>
+        <li class='game-right spacer'>&nbsp;</li>
+        <li class='game-right game-bottom'>{{ f4[3].seed }}) {{ f4[3].name }}</li>
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round round-3'>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game-right game-top'>{{ e8[4].seed }}) {{ e8[4].name }}</li>
+        <li class='game-right spacer region region-left'>Midwest</li>
+        <li class='game-right game-bottom'>{{ e8[5].seed }}) {{ e8[5].name }}</li>
+        <li class='spacer'>&nbsp;</li>
+        <li class='game-right game-top'>{{ e8[6].seed }}) {{ e8[6].name }}</li>
+        <li class='game-right spacer region region-left'>South</li>
+        <li class='game-right game-bottom'>{{ e8[7].seed }}) {{ e8[7].name }}</li>
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round round-2'>
+        {% for i in range((s16 | length)//2, (s16 | length), 2) %}
+          <li class='spacer'>&nbsp;</li>
+          <li class='game-right game-top'>{{ s16[i].seed }}) {{ s16[i].name }}</li>
+          <li class='game-right spacer'>&nbsp;</li>
+          <li class='game-right game-bottom'>{{ s16[i+1].seed }}) {{ s16[i+1].name }}</li>
+        {% endfor %}
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round round-1'>
+        {% for i in range((r32 | length)//2, (r32 | length), 2) %}
+          <li class='spacer'>&nbsp;</li>
+          <li class='game-right game-top'>{{ r32[i].seed }}) {{ r32[i].name }}</li>
+          <li class='game-right spacer'>&nbsp;</li>
+          <li class='game-right game-bottom'>{{ r32[i+1].seed }}) {{ r32[i+1].name }} </li>
+        {% endfor %}
+        <li class='spacer'>&nbsp;</li>
+      </ul>
+      <ul class='round seed'>
+        {% for i in range((r64 | length)//2, (r64 | length), 2) %}
+          <li class='spacer'>&nbsp;</li>
+          <li class='game-right game-top'>
+            <span>{{ r64[i].seed }}</span>
+            <span>{{ r64[i].name }}</span>
+          </li>
+          <li class='game-right game-bottom'>
+            <span>{{ r64[i+1].seed }}</span>
+            <span>{{ r64[i+1].name }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+</body
+</html>
